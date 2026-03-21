@@ -36,7 +36,7 @@ jobs:
                 repo: context.repo.repo,
                 run_id: runId,
             });
-
+            console.log(`Host: ${process.env.ELASTIC_HOST.toString().substring(0, 14)}`);
             const jobs = data.jobs.filter(
                 (job) =>
                 (!!job.conclusion && job.conclusion !== "skipped") &&
