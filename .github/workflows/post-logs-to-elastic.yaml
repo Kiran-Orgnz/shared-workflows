@@ -1,0 +1,41 @@
+name: Port logs to elastic
+
+on:
+  workflow_call:
+    inputs:
+      release_tag:
+        description: "The unique release tag"
+        type: string
+        required: true
+      helm_env:
+        description: "Helm Chart Environment"
+        type: string
+        required: true
+    secrets:
+      ELASTIC_HOST:
+        required: true
+      ELASTIC_KEY:
+        required: true
+      ELASTIC_INDEX:
+        required: true
+
+jobs:
+  port-job-logs-to-elastic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ship job results
+        uses: actions/github-script@v7
+        env:
+          ELASTIC_INDEX: ${{ secrets.ELASTIC_INDEX }}
+          ELASTIC_HOST: ${{ secrets.ELASTIC_HOST }}
+          ELASTIC_KEY: ${{ secrets.ELASTIC_KEY }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          HELM_ENV: ${{ inputs.helm_env }}
+          ACTOR: ${{ github.actor }}
+        with:
+          script: |
+            const script = require('./.github/scripts/ship-logs-to-elastic.cjs')
+            await script({ github, context, core })
