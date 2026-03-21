@@ -11,13 +11,6 @@ on:
         description: "Helm Chart Environment"
         type: string
         required: true
-    secrets:
-      ELASTIC_HOST:
-        required: true
-      ELASTIC_KEY:
-        required: true
-      ELASTIC_INDEX:
-        required: true
 
 jobs:
   port-job-logs-to-elastic:
@@ -37,6 +30,6 @@ jobs:
           ACTOR: ${{ github.actor }}
         with:
           script: |
-            console.log(${{ github.action_path }})
+            console.log(${{ github.action_path }});
             const script = require('${{ github.action_path }}/scripts/ship-logs-to-elastic.cjs');
             await script({ github, context, core });
