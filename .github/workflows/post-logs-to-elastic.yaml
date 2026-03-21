@@ -30,6 +30,5 @@ jobs:
           ACTOR: ${{ github.actor }}
         with:
           script: |
-            console.log(${{ github.action_path }});
-            const script = require('${{ github.action_path }}../scripts/ship-logs-to-elastic.cjs');
+            const script = require('Kiran-Orgnz/shared-workflows/.github/scripts/ship-logs-to-elastic.cjs');
             await script({ github, context, core });
