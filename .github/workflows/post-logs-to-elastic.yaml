@@ -37,5 +37,5 @@ jobs:
           ACTOR: ${{ github.actor }}
         with:
           script: |
-            const script = require('./.github/scripts/ship-logs-to-elastic.cjs')
-            await script({ github, context, core })
+            const script = require('${{ github.action_path }}/../scripts/ship-logs-to-elastic.cjs');
+            await script({ github, context, core });
