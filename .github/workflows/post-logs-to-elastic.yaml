@@ -32,10 +32,16 @@ jobs:
           script: |
             const runId = context.runId;  
             const { data } = await github.rest.actions.listJobsForWorkflowRun({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 run_id: runId,
             });
+
+            const jobs = data.jobs.filter(
+                (job) =>
+                (!!job.conclusion && job.conclusion !== "skipped") &&
+                !job.name?.toLowerCase().includes("notify")
+            );
         
             const elasticHost = process.env.ELASTIC_HOST;
             const elasticIndex = process.env.ELASTIC_INDEX;
