@@ -4,7 +4,6 @@
   teams-notification:
     channels:
       - operations
-      - platform
     events:
       - on-sync-succeeded
   environment-mapping:
