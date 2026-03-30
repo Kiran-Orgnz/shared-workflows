@@ -1,7 +1,7 @@
 - repo-url: https://github.com/Kiran-Orgnz/shared-workflows/glow-helm.git
   argo-project-name: portal-glow
   argo-application-name: portal-glow
-  teams-notification: operations
+  teams-notification: operations;platform
   environment-mapping:
   - dev: portals-non-prod
   - staging: portals-non-prod
