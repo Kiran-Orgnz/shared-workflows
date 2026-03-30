@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: '{{ArgoApplicationSetName}}'
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: {{GitUrl}}
+      revision: {{GitBranch}}
+      directories:
+      - path: '{{ArgoRootManifestPath}}/{{Env}}'
+  template:
+    metadata:
+      name: '{{ArgoApplicationName}}'
+      {{teams-notification}}
+      namespace: argocd
+    spec:
+      {{Application-syncPolicy}}
+      project: {{ArgoProject}}
+      source:
+        repoURL: {{GitUrl}}
+        targetRevision: {{GitBranch}}
+        path: '{{.path.path}}'
+        helm:
+          valueFiles:
+          - {{ValuesFile}}
+      destination:
+        name: '{{EKSClusterName}}'
+        namespace: '{{ApplicationNamespace}}'
+      revisionHistoryLimit: 5
+  {{syncPolicy}}

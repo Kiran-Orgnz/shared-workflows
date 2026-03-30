@@ -1,0 +1,196 @@
+- repo-url: https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/infra
+  argo-project-name: admin
+  argo-application-name: Infra
+  use-branches: true
+  teams-notification:
+    channels:
+      - platform
+  environment-mapping:
+  - non-prod: tmnl-non-prod-cluster
+  - prod-mirror: tmnl-prod-mirror-cluster
+- repo-url: https://github.com/Odido-AWS-Platform/eks-core-infra.git
+  argo-project-name: admin
+  argo-application-name: infra
+  use-branches: true
+  teams-notification:
+    channels:
+      - platform
+  environment-mapping:
+  - shared-services: tmnl-shared-services-cluster
+  - portals-prod: portals-prod
+  - portals-non-prod: portals-non-prod
+  - ike-prod: ike-prod
+  - ike-nonprod: ike-nonprod
+  - dirk-nonprod: dirk-nonprod
+  - dirk-prod: dirk-prod
+  - prod-mirror-nc: prod-mirror-nc 
+- repo-url: https://github.com/Odido-AWS-Platform/eks-cluster-infra.git
+  argo-project-name: admin
+  argo-application-name: cluster-infra
+  use-branches: true
+  teams-notification:
+    channels:
+      - platform
+  environment-mapping:
+  - shared-services: tmnl-shared-services-cluster
+  - portals-non-prod: portals-non-prod
+  - portals-prod: portals-prod
+  - ike-nonprod: ike-nonprod
+  - ike-prod: ike-prod
+  - dirk-nonprod: dirk-nonprod
+- repo-url: https://github.com/Odido-AWS-Platform/ewf-helm.git
+  argo-project-name: portal-ewf
+  argo-application-name: portal-ewf
+  append-project: false
+  environment-mapping:
+  - dev: portals-non-prod
+  - staging: portals-non-prod
+  - agile: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/oss-helm.git
+  argo-project-name: oss
+  argo-application-name: oss
+  append-project: false
+  environment-mapping:
+  - private-agile: ike-nonprod
+  - public-agile: portals-non-prod
+  - private-staging: ike-nonprod
+  - public-staging: portals-non-prod
+- repo-url: https://github.com/Odido-AWS-Platform/sre-helm.git
+  argo-project-name: sre
+  argo-application-name: sre
+  append-project: false
+  environment-mapping:
+  - staging: tmnl-shared-services-cluster
+  - prod: tmnl-shared-services-cluster
+- repo-url: https://github.com/Odido-AWS-Platform/ciam-helm.git
+  argo-project-name: portal-ciam
+  argo-application-name: portal-ciam
+  append-project: false
+  environment-mapping:
+  - dev: portals-non-prod
+  - staging: portals-non-prod
+  - agile: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/media-core-helm.git
+  argo-project-name: media-services
+  argo-application-name: media-core
+  append-project: false
+  environment-mapping:
+  - dev: portals-non-prod
+  - agile: portals-non-prod
+  - staging: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/ike-byn-helm.git
+  argo-project-name: infonova
+  argo-application-name: infonova
+  environment-mapping:
+  - staging: ike-nonprod
+  - pre-dev: ike-nonprod
+  - dev: ike-nonprod
+  - agile: ike-nonprod
+  - prod: ike-prod
+- repo-url: https://github.com/Odido-AWS-Platform/ekam-byn-helm.git
+  argo-project-name: infonova
+  argo-application-name: infonova-tyk
+  environment-mapping:
+  - staging: portals-non-prod
+  - pre-dev: portals-non-prod
+  - dev: portals-non-prod
+  - agile: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/glow-helm.git
+  argo-project-name: portal-glow
+  argo-application-name: portal-glow
+  teams-notification:
+    channels:
+      - operations
+    events:
+      - on-sync-succeeded
+      - on-sync-failed
+      - on-health-degraded
+  environment-mapping:
+  - dev: portals-non-prod
+  - staging: portals-non-prod
+  - agile: portals-non-prod
+  - testpreview: portals-non-prod
+  - editpreview: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/netcracker-helm
+  argo-project-name: netcracker
+  argo-application-name: netcracker
+  use-branches: true
+  environment-mapping:
+  - staging: tmnl-non-prod-cluster
+  - agile: tmnl-non-prod-cluster
+  - new-mig: tmnl-non-prod-cluster
+- repo-url: https://github.com/Odido-AWS-Platform/employee-app-helm.git
+  argo-project-name: portal-ea
+  argo-application-name: portal-ea
+  append-project: false
+  environment-mapping:
+  - agile: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/switch-helm.git
+  argo-project-name: portal-switch
+  argo-application-name: portal-switch
+  append-project: false
+  environment-mapping:
+  - agile: portals-non-prod
+  - staging: portals-non-prod
+  - prod: portals-prod
+- repo-url: https://github.com/Odido-AWS-Platform/ei-helm.git
+  argo-project-name: ei
+  argo-application-name: ei
+  use-branches: true
+  teams-notification:
+    channels:
+      - operations
+    events:
+      - on-sync-succeeded
+      - on-sync-failed
+      - on-health-degraded
+  environment-mapping:
+  - public-nonprod: portals-non-prod
+  - internal-nonprod: ike-nonprod
+  - public-prod: portals-prod 
+  - internal-prod: ike-prod
+- repo-url: https://github.com/Odido-AWS-Platform/ei-apps-helm.git
+  argo-project-name: ei
+  argo-application-name: apps-ei
+  use-branches: false
+  append-project: false
+  environment-mapping:
+  - agile: ike-nonprod
+  - staging: ike-nonprod
+  - dev: ike-nonprod
+  - prod: ike-prod
+- repo-url: https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/ds-ai-helm
+  argo-project-name: ds-ai
+  argo-application-name: ds-ai
+  environment-mapping:
+  - dev: dirk-nonprod
+  - staging: dirk-nonprod
+  - agile: dirk-nonprod
+  - prod: dirk-prod
+- repo-url: https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/roamcare-helm
+  argo-project-name: wsms
+  argo-application-name: wsms-roam-care
+  append-project: false
+  environment-mapping:
+  - staging: dirk-nonprod
+  - agile: dirk-nonprod
+- repo-url: https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/raid-helms
+  argo-project-name: raid
+  argo-application-name: raid
+  environment-mapping:
+  - test: tmnl-non-prod-cluster
+  - agile: tmnl-non-prod-cluster
+- repo-url: https://github.com/Odido-AWS-Platform/dirk-ippt-helm.git
+  argo-project-name: ippt
+  argo-application-name: ippt
+  environment-mapping:
+  - dev: dirk-nonprod
+  - agile: dirk-nonprod
+  - staging: dirk-nonprod
+  - prod: dirk-prod
