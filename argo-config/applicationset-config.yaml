@@ -2,8 +2,7 @@
   argo-project-name: portal-glow
   argo-application-name: portal-glow
   teams-notification:
-    channel: 
-      - operations
+    channel: operations
     events:
       - on-app-degraded
   environment-mapping:
