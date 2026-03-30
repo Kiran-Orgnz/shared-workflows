@@ -21,7 +21,6 @@ def re_create_folder(repo_name):
 def build_teams_annotations(teams_config):
     if not teams_config:
         return ""
-    annotations = "annotations:\n"
 
     default_events = [
             "on-sync-succeeded",
@@ -37,9 +36,19 @@ def build_teams_annotations(teams_config):
         channels = teams_config.get("channels") or [teams_config.get("channel")]
         events = teams_config.get("events", default_events)
 
-    for channel in channels:
-        for event in events:
-            annotations += f"        notifications.argoproj.io/subscribe.{event}.teams: {channel}\n"
+    else:
+        return ""
+    
+    # Remove empty values and duplicates while preserving order
+    channels = list(dict.fromkeys([c for c in channels if c]))
+    events = list(dict.fromkeys([e for e in events if e]))
+
+    annotations = "annotations:\n"
+    for event in events:
+        annotations += (
+            f"        notifications.argoproj.io/subscribe.{event}.teams: "
+            f"{';'.join(channels)}\n"
+        )
 
     return annotations
 
