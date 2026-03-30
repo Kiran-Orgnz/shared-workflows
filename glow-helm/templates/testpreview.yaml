@@ -16,9 +16,7 @@ spec:
     metadata:
       name: '{{.path.basenameNormalized}}-{{index .path.segments 0}}-portal-glow'
       annotations:
-        notifications.argoproj.io/subscribe.on-sync-succeeded.teams: operations;platform
-        notifications.argoproj.io/subscribe.on-sync-failed.teams: operations;platform
-        notifications.argoproj.io/subscribe.app-health-degraded.teams: operations;platform
+        notifications.argoproj.io/subscribe.on-app-degraded.teams: operations
       namespace: argocd
     spec:
       syncPolicy:
