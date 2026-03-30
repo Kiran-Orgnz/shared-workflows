@@ -43,14 +43,13 @@ def build_teams_annotations(teams_config):
     channels = list(dict.fromkeys([c for c in channels if c]))
     events = list(dict.fromkeys([e for e in events if e]))
 
-    annotations = "annotations:\n"
+    lines = ["annotations:"]
     for event in events:
-        annotations += (
-            f"        notifications.argoproj.io/subscribe.{event}.teams: "
-            f"{';'.join(channels)}\n"
+        lines.append(
+            f"        notifications.argoproj.io/subscribe.{event}.teams: {';'.join(channels)}"
         )
 
-    return annotations
+    return "\n".join(lines)
 
 def create_yaml(application_name, application_project, git_url, env, root_manifest_path, eks_cluster_name, use_branches, append_project, teams_config):
     f = open('argo-config/argo-applicationset-template.yaml','r', encoding="utf8")
