@@ -18,7 +18,8 @@ spec:
       annotations:
         notifications.argoproj.io/subscribe.on-sync-succeeded.teams: operations
         notifications.argoproj.io/subscribe.on-sync-failed.teams: operations
-        notifications.argoproj.io/subscribe.on-health-degraded.teams: operations
+        notifications.argoproj.io/subscribe.on-sync-succeeded.teams: platform
+        notifications.argoproj.io/subscribe.on-sync-failed.teams: platform
 
       namespace: argocd
     spec:
