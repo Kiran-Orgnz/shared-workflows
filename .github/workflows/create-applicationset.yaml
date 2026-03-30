@@ -1,0 +1,17 @@
+name: Create / Update the applicationset for a helm repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-update-applicationset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Run create-update-applicationset
+        run: |
+          python ./.github/workflows/scripts/create-update-applicationset.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Apply new argocd applicationsets
