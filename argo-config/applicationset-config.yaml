@@ -4,9 +4,6 @@
   teams-notification:
     channels:
       - operations
-    events:
-      - on-sync-succeeded
-      - on-health-degraded
   environment-mapping:
   - dev: portals-non-prod
   - staging: portals-non-prod
