@@ -4,6 +4,7 @@
   teams-notification:
     channels:
       - operations
+      - platform
     events:
       - on-sync-succeeded
       - on-sync-failed
