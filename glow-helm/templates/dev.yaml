@@ -15,6 +15,9 @@ spec:
   template:
     metadata:
       name: '{{.path.basenameNormalized}}-{{index .path.segments 0}}-portal-glow'
+      annotations:
+        notifications.argoproj.io/subscribe.on-sync-succeeded.teams: operations;platform
+
       namespace: argocd
     spec:
       syncPolicy:
