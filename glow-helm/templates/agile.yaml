@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: 'agile-portal-glow'
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/Kiran-Orgnz/shared-workflows/glow-helm.git
+      revision: main
+      directories:
+      - path: '**/agile'
+  template:
+    metadata:
+      name: '{{.path.basenameNormalized}}-{{index .path.segments 0}}-portal-glow'
+      annotations:
+        notifications.argoproj.io/subscribe.on-sync-succeeded.teams: operations
+        notifications.argoproj.io/subscribe.on-sync-failed.teams: operations
+        notifications.argoproj.io/subscribe.on-health-degraded.teams: operations
+
+      namespace: argocd
+    spec:
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      project: portal-glow
+      source:
+        repoURL: https://github.com/Kiran-Orgnz/shared-workflows/glow-helm.git
+        targetRevision: main
+        path: '{{.path.path}}'
+        helm:
+          valueFiles:
+          - values.yaml
+      destination:
+        name: 'portals-non-prod'
+        namespace: '{{.path.basenameNormalized}}-{{index .path.segments 0}}-portal-glow'
+      revisionHistoryLimit: 5
+  syncPolicy:
+    applicationsSync: create-update
+    preserveResourcesOnDeletion: true
